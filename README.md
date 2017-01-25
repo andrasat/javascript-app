@@ -1,8 +1,8 @@
 # Hangman
 
-This is a hangman game made with javascript to complete an assignment in Hacktiv8 Phase 0 - Week 2 - Day 5
+This is a hangman game made with javascript + Jquery to complete an assignment in Hacktiv8 Phase 0 - Week 2 - Day 5.
 
-## Pseudocode
+## Pseudocode hangman.js
 
 ```
 INIT hangman app

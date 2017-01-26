@@ -7,8 +7,8 @@ This is a hangman game made with javascript + Jquery to complete an assignment i
 ```
 INIT hangman app
 VAR chances, guessed, currentWord
-OBJ hiddenword {word, hint}
+VAR hiddenword {category, words}
 
-METHOD playGame
-    
+FUNC setup
+    BUTTON click func -> choose category 
 ```

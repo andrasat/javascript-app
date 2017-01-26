@@ -5,10 +5,7 @@ $(document).ready(function () {
     // Defines variables
     'use strict';
     var i,
-        hiddenWord = {
-            animal: ['', 'cat', 'dog', 'elephant', 'lion'],
-            movie: ['', 'alien', 'up', 'inception']
-        },
+        hiddenWord = ['cat', 'dog', 'elephant', 'eagle', 'giraffe', 'rhino'],
         choosenWord = '', // Word choosen after player choose category
         dashes = '', // dashes as placeholder for the word
         chance = 0, // lives
@@ -30,19 +27,10 @@ $(document).ready(function () {
 
     function setup() {
 
-        // Player select category, then element dissapear
-        $('#animal').click(function () {
-            choosenWord = hiddenWord.animal[Math.floor(Math.random() * 4) + 1];
-            choosenWord = choosenWord.split('');
-            $('.header').toggle();
-            //console.log(choosenWord); To check choosenWord defined or not
-        });
-        $('#movie').click(function () {
-            choosenWord = hiddenWord.movie[Math.floor(Math.random() * 3) + 1];
-            choosenWord = choosenWord.split('');
-            $('.header').toggle();
-            //console.log(choosenWord); To check choosenWord defined or not
-        });
+        // Randomize category and hiddenWord
+        choosenWord = hiddenWord[Math.floor(Math.random() * 6)];
+        choosenWord = choosenWord.split('');
+        console.log(choosenWord); // check if hiddenWord randomized and stored in choosenWord
 
         // game setup
         chance = 5;
@@ -53,9 +41,11 @@ $(document).ready(function () {
 
         // set choosenWord hidden in underlines
         for (i = 0; i < choosenWord.length; i += 1) {
-            $('#hidden-word').html('<li class="word letter' + choosenWord[i].toUpperCase + '">_</li>');
+            $('#hidden').append('<li class="word letter' + choosenWord[i].toUpperCase() + '">' + choosenWord[i].toUpperCase() + '</li>');
         }
 
     }
     setup(); // first setup
+
+
 });

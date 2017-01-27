@@ -11,17 +11,17 @@
     <div class="hangman">
         <div class="header">
             <h1>The Hangman Game</h1>
-            <h3>Guess what is the name of an animal hidden here</h3>
+            <h3></h3>
         </div>
-        <form class="game">
-            <input type="text" maxlength="1" minlength="1" name="letter-input" id="letter-input">
-            <input id="guess" name="guess" type="submit" value="playerGuess">
-            <button id="reset" name="restart">Reset Game</button>
-        </form>
-        <div class="information">
-            <ul id="hidden"></ul>
-            <p id="chances"></p>
-            <p id="alert-message"></p>
+        <div class="game">
+            <h2>Choose your letter :</h2>
+            <ul class="letters"></ul>
+            <h2>Hidden word :</h2>
+            <ul class="hidden"></ul>
+        </div>
+        <div class="info">
+            <p class="chances"></p>
+            <button id="reset">Reset Game</button>
         </div>
         <div class="footer"> </div>
     </div>

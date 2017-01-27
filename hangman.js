@@ -4,20 +4,23 @@
 $(document).ready(function () {
     // Defines variables
     'use strict';
-    var i,
-        hiddenWord = ['cat', 'dog', 'elephant', 'eagle', 'giraffe', 'rhino'],
+    var i, x, y, t,
+        result, prop,
+        count = 0,
+        hiddenWord = {
+            animal: ['cat', 'dog', 'elephant', 'eagle', 'giraffe', 'rhino'],
+            movie: ['alien', 'harrypotter', 'up', 'inception', 'thegodfather', 'zootopia']
+        },
         choosenWord = '', // Word choosen after player choose category
         dashes = '', // dashes as placeholder for the word
         chance = 0, // lives
         letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], // letters to use in game
-        messages = {
-            win: 'Congratulation, you win !',
-            lose: 'Sorry, you lose !',
-            guessed: 'that letter already entered, choose another',
-            valid: 'please enter letter A-Z'
-        }, // game messages
-        guessed,
-        matched;
+        playerGuess, // input from player
+        countCorrect, // count correct guess
+        hiddenLett, // letters hidden
+        buttonClicked = false,
+        selected,
+        guesses = []; // stored letters needed to be guessed
 
     /* 
     
@@ -25,27 +28,92 @@ $(document).ready(function () {
     
     */
 
-    function setup() {
-
-        // Randomize category and hiddenWord
-        choosenWord = hiddenWord[Math.floor(Math.random() * 6)];
-        choosenWord = choosenWord.split('');
-        console.log(choosenWord); // check if hiddenWord randomized and stored in choosenWord
-
-        // game setup
-        chance = 5;
-        guessed = matched = '';
-
-        // display player's chances left
-        $('#chances').html('Your got ' + chance + ' chances left');
-
-        // set choosenWord hidden in underlines
-        for (i = 0; i < choosenWord.length; i += 1) {
-            $('#hidden').append('<li class="word letter' + choosenWord[i].toUpperCase() + '">' + choosenWord[i].toUpperCase() + '</li>');
+    // Randomize category
+    function randomize(obj) {
+        for (prop in obj) {
+            if (Math.random() < 1 / ++count) {
+                result = prop;
+            }
         }
+        choosenWord = hiddenWord[result][Math.floor(Math.random() * 6)];
 
+        $('h3').text('Your category is ' + result);
+        console.log(choosenWord);
+        return choosenWord;
     }
-    setup(); // first setup
 
+    // Create hiddenWord list for guessing
+    function setHidden() {
+        for (x = 0; x < choosenWord.length; x += 1) {
+            hiddenLett = '<li class="hide-letter">_</li>';
+            $('.hidden').append(hiddenLett);
+
+            guesses.push(hiddenLett);
+        }
+    }
+
+    // Show player's chances
+    function chanceInfo() {
+        $('.chances').html('Your chances left: ' + chance);
+        if (chance < 1) {
+            $('.chances').html('Sorry, you lose');
+        }
+        for (y = 0; y < guesses.length; y += 1) {
+            if (countCorrect === guesses.length) {
+                $('.chances').html('Congratulation, you win!');
+            }
+        }
+    }
+
+    // When player click on alphabet
+    function clicked() {
+        $('.alphabet').click(function () {
+            playerGuess = $('.alphabet').text().toLowerCase();
+            $('.alphabet').attr('class', 'active');
+            this.onclick = null;
+            for (t = 0; t < choosenWord.length; t += 1) {
+                if (choosenWord[t] === playerGuess) {
+                    guesses[i].html = playerGuess.toUpperCase();
+                    countCorrect += 1;
+                }
+            }
+            if ($.inArray(playerGuess, choosenWord) === -1) {
+                chance -= 1;
+                chanceInfo();
+            } else {
+                chanceInfo();
+            }
+        });
+    }
+
+    // Create alphabet list for player input
+    function setAlphabet() {
+        for (i = 0; i < letters.length; i += 1) {
+            $('.letters').append('<li class="alphabet">' + letters[i].toUpperCase() + '</li>');
+
+            clicked();
+        }
+    }
+
+    // Play Game
+    function play() {
+
+        randomize(hiddenWord);
+        setAlphabet();
+        clicked();
+        chance = 5;
+        countCorrect = 0;
+        setHidden();
+        chanceInfo();
+    }
+
+    play();
+
+    // Reset function
+    $('#reset').click(function () {
+        $('.letters').empty();
+        $('.hidden').empty();
+        play();
+    });
 
 });

@@ -1,0 +1,66 @@
+body {
+    background: rgba(0, 157, 201, 0.7);
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+}
+
+
+/*
+    Header
+*/
+
+.header {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 244, 233, 0.3);
+    align-content: center;
+    margin: auto;
+}
+
+h1,
+h3 {
+    padding: 0.5em;
+    text-align: center;
+    color: rgba(255, 255, 250, 0.7);
+}
+
+
+/*
+    Game
+*/
+
+.game {
+    position: relative;
+    top: 12em;
+    display: block;
+}
+
+.game li {
+    display: inline-block;
+    margin: 0.25em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.game li#alphabets {
+    background: rgba(0, 90, 173, 0.2);
+}
+
+.game li .active {
+    background: rgba(0, 90, 173, 0.9);
+}
+
+
+/*
+    Info
+*/
+
+.info {
+    display: block;
+    position: relative;
+    top: 12em;
+}

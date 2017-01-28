@@ -18,8 +18,7 @@ $(document).ready(function () {
         playerGuess, // input from player
         countCorrect, // count correct guess
         hiddenLett, // letters hidden
-        buttonClicked = false,
-        selected,
+        aList, // store alphabet list
         guesses = []; // stored letters needed to be guessed
 
     /* 
@@ -37,7 +36,7 @@ $(document).ready(function () {
         }
         choosenWord = hiddenWord[result][Math.floor(Math.random() * 6)];
 
-        $('h3').text('Your category is ' + result);
+        $('h3').text('Your category is ' + result.toUpperCase());
         console.log(choosenWord);
         return choosenWord;
     }
@@ -45,10 +44,13 @@ $(document).ready(function () {
     // Create hiddenWord list for guessing
     function setHidden() {
         for (x = 0; x < choosenWord.length; x += 1) {
-            hiddenLett = '<li class="hide-letter">_</li>';
+            hiddenLett = document.createElement('li');
+            hiddenLett.setAttribute('class', 'hidden-letter');
+            hiddenLett.innerHTML = '_';
             $('.hidden').append(hiddenLett);
 
             guesses.push(hiddenLett);
+            console.log(guesses);
         }
     }
 
@@ -57,23 +59,26 @@ $(document).ready(function () {
         $('.chances').html('Your chances left: ' + chance);
         if (chance < 1) {
             $('.chances').html('Sorry, you lose');
+            $('.game').hide();
         }
         for (y = 0; y < guesses.length; y += 1) {
             if (countCorrect === guesses.length) {
                 $('.chances').html('Congratulation, you win!');
+                $('.game').hide();
             }
         }
     }
 
     // When player click on alphabet
     function clicked() {
-        $('.alphabet').click(function () {
-            playerGuess = $('.alphabet').text().toLowerCase();
-            $('.alphabet').attr('class', 'active');
+        aList.onclick = function () {
+            playerGuess = (this.innerHTML);
+            this.setAttribute('class', 'active');
             this.onclick = null;
+            console.log(playerGuess);
             for (t = 0; t < choosenWord.length; t += 1) {
                 if (choosenWord[t] === playerGuess) {
-                    guesses[i].html = playerGuess.toUpperCase();
+                    guesses[t].innerHTML = playerGuess.toUpperCase();
                     countCorrect += 1;
                 }
             }
@@ -83,15 +88,17 @@ $(document).ready(function () {
             } else {
                 chanceInfo();
             }
-        });
+        };
     }
 
     // Create alphabet list for player input
     function setAlphabet() {
         for (i = 0; i < letters.length; i += 1) {
-            $('.letters').append('<li class="alphabet">' + letters[i].toUpperCase() + '</li>');
-
+            aList = document.createElement('li');
+            aList.id = 'alphabets';
+            aList.innerHTML = letters[i];
             clicked();
+            $('.letters').append(aList);
         }
     }
 
@@ -111,6 +118,7 @@ $(document).ready(function () {
 
     // Reset function
     $('#reset').click(function () {
+        $('.game').show();
         $('.letters').empty();
         $('.hidden').empty();
         play();

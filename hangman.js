@@ -63,7 +63,7 @@ $(document).ready(function () {
         }
         for (y = 0; y < guesses.length; y += 1) {
             if (countCorrect === guesses.length) {
-                $('.chances').html('Congratulation, you win!');
+                $('.chances').html('Congratulation, you win! the word is: ' + choosenWord.toUpperCase());
                 $('.game').hide();
             }
         }
@@ -75,6 +75,7 @@ $(document).ready(function () {
             playerGuess = (this.innerHTML);
             this.setAttribute('class', 'active');
             this.onclick = null;
+            console.log(this);
             console.log(playerGuess);
             for (t = 0; t < choosenWord.length; t += 1) {
                 if (choosenWord[t] === playerGuess) {
@@ -118,6 +119,7 @@ $(document).ready(function () {
 
     // Reset function
     $('#reset').click(function () {
+        guesses = [];
         $('.game').show();
         $('.letters').empty();
         $('.hidden').empty();

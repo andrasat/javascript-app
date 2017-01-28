@@ -12,7 +12,6 @@ $(document).ready(function () {
             movie: ['alien', 'harrypotter', 'up', 'inception', 'thegodfather', 'zootopia']
         },
         choosenWord = '', // Word choosen after player choose category
-        dashes = '', // dashes as placeholder for the word
         chance = 0, // lives
         letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], // letters to use in game
         playerGuess, // input from player
@@ -27,7 +26,7 @@ $(document).ready(function () {
     
     */
 
-    // Randomize category
+    // Randomize hiddenWord -- found this on stack overflow
     function randomize(obj) {
         for (prop in obj) {
             if (Math.random() < 1 / ++count) {

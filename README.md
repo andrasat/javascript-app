@@ -1,10 +1,10 @@
 # Hangman
 
-This is a hangman game made with javascript + Jquery to complete an assignment in Hacktiv8 Phase 0 - Week 2 - Day 5. Combining javascript and jQuery is really hard but i learned a lot.
+This is a hangman game made with javascript + Jquery to complete an assignment in Hacktiv8 Phase 0 - Week 2 - Day 5. Combining javascript and jQuery is really hard but i learned a lot. I made this based on Cathy Dutton codepen's [Hangman Game](https://codepen.io/cathydutton/pen/ldazc).
 
 *Reference*
 
-Pick a random property from a Javascript object [randomize prop](http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object)
+* Pick a random property from a Javascript object [randomize prop](http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object)
 
 ## Pseudocode hangman.js
 
